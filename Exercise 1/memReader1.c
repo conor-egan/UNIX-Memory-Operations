@@ -1,9 +1,10 @@
 /***********************************************************************
-Program: memReader.c
+Program: memReader1.c
 
 Open a shared a shared memory object, map to that object and read it.
 
 Donal Heffernan 6/November/2014   Updated 22/October/2015
+Edited by Conor Egan 22 April
 ************************************************************************/
 #include <stdlib.h>
 #include <stdio.h>
@@ -40,7 +41,8 @@ printf("Opened the shared memory object (read only): %s\n", SHARED_OBJ_PATH);
         perror("error in  mmap()") ;
         exit(1);
     }
-write(mfd, "This should cause an error", 30); //should cause an error, this program has opened memory object as read-only
+memcpy(shared_msg, "This should cause an error", 30); //should cause an error, this program has opened memory object as read-only
+
 printf("Shared memory size allocated is %d bytes\n", seg_size);
 printf("The message content actually read is: .... %s\n", shared_msg);
 printf("The page size for this system is %ld bytes.\n", sysconf(_SC_PAGESIZE));
